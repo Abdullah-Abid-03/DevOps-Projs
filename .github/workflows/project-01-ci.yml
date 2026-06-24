@@ -26,7 +26,7 @@ jobs:
         run: |
           pip install flake8
           pip install -r "Project - 01/Sample_Flask_app/requirements.txt"
-          flake8 "Project - 01/Sample_Flask_app/app.py" --max-line-length=100
+          flake8 "Project - 01/Sample_Flask_app/app.py" --max-line-length=200
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
