@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+*.egg-info/
+*.html
+.DS_Store
+
+# Docker related
+*.log
+EOF
