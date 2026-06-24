@@ -1,1 +1,0 @@
-# For kubernetes deployment, you can create a `deployment.yaml` file that defines the desired state of your application. Below is an example of a simple deployment configuration for a Flask application:
