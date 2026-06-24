@@ -9,8 +9,8 @@ on:
     branches: [ main ]
     paths:
       - 'Project - 01/**'   # ← KEY: This is the Important Magic: only fires when Project-01 files change. 
-                             #   pushing Project-02, 03, 04,... won't trigger this pipeline
-      - '.github/workflows/project-01-ci.yml'
+                             #   pushing Project-02, 03, 04,... won't trigger this pipeline. Only any chnages to Project-01 files will trigger this pipeline.
+      - '.github/workflows/project-01-ci.yml' # Also when any changes to this CI workflow file itself are pushed 
 
 jobs:
   build-and-push:
