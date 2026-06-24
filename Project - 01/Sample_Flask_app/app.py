@@ -97,8 +97,12 @@ def hello():
                     <li>Prometheus Metrics</li>
                     <li>Docker Ready</li>
                     <li>Kubernetes Ready</li>
-                    <li>Grafana Compatible</li>
                 </ul>
+            </div>
+            <div class="card">
+                <h3>Deployment Information</h3>
+                <p><strong>Replicas:</strong> 1</p>
+                <p><strong>Image:</strong> abdullah4261/sample-flask-app:latest</p>
             </div>
         </div>
     </body>
