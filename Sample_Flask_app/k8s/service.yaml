@@ -1,0 +1,1 @@
+# For Kubernetes Service, you can create a `service.yaml` file that defines how to expose your application to the network. Below is an example of a simple service configuration for a Flask application:
