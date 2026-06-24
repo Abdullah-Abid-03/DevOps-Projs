@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: abdullah4261/sample-flask-app:latest   # Your Docker Hub image
+        image: abdullah4261/devops-project-01:latest   # Your Docker Hub image
+        imagePullPolicy: Always  # Always pull the latest image from Docker Hub
         ports:
         - containerPort: 5000
         resources:
