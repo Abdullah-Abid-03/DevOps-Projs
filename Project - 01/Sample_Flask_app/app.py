@@ -6,9 +6,13 @@ app = Flask(__name__)
 
 # A metric counter — counts how many times "/" is visited
 # Prometheus will read this number
-REQUEST_COUNT = Counter('app_requests_total', 'Total number of homepage requests')
+REQUEST_COUNT = Counter(
+    'app_requests_total',
+    'Total number of homepage requests'
+)
 
-@app.route('/') # The homepage.
+
+@app.route('/')  # The homepage.
 def hello():
     REQUEST_COUNT.inc()
 
@@ -102,15 +106,13 @@ def hello():
     """, 200
 
 
-
-
-@app.route('/health') # A health check URL. Kubernetes pings this every few seconds. If it gets a 200 back, the app is alive. If not, K8s restarts it.
+@app.route('/health')  # A health check URL. Kubernetes pings this every few seconds. If it gets a 200 back, the app is alive. If not, K8s restarts it.
 def health():
     """Kubernetes pings this endpoint to check if our app is alive"""
     return {'status': 'healthy'}, 200
 
 
-@app.route('/metrics') #  Prometheus scrapes this to collect all your metrics (request count, process stats, etc.).
+@app.route('/metrics')  # Prometheus scrapes this to collect all your metrics (request count, process stats, etc.).
 def metrics():
     """Prometheus scrapes this URL every 15 seconds to collect stats"""
     return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
@@ -119,4 +121,4 @@ def metrics():
 if __name__ == '__main__':
     # host='0.0.0.0' = accept connections from ANY IP (required in containers!)
     # Without this, Docker/K8s can't reach the app
-    app.run(host='0.0.0.0', port=5000, debug=False) # Critical! Without this, Flask only listens on localhost inside the container and nothing outside can reach it
+    app.run(host='0.0.0.0', port=5000, debug=False)  # Critical! Without this, Flask only listens on localhost inside the container and nothing outside can reach it
