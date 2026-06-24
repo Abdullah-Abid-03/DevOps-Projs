@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 .env
+.venv/
 *.egg-info/
 *.html
 .DS_Store

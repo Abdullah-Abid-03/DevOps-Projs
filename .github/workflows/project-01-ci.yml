@@ -1,2 +1,43 @@
 # for GitHub Actions pipeline (section 4)
 
+# Name appears in GitHub's Actions tab
+name: Project-01 CI Pipeline
+
+# Run this workflow when code is pushed to the main branch, but only if files in the Project-01 folder have changed
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Project - 01/**'   # ← KEY: This is the Important Magic: only fires when Project-01 files change. 
+                             #   pushing Project-02, 03, 04,... won't trigger this pipeline
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install & lint
+        run: |
+          pip install flake8
+          pip install -r "Project - 01/Sample_Flask_app/requirements.txt"
+          flake8 "Project - 01/Sample_Flask_app/app.py" --max-line-length=100
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/devops-project-01
+          docker build -t $IMAGE:${{ github.sha }} "./Project - 01/Sample_Flask_app"
+          docker push $IMAGE:${{ github.sha }}
+          docker tag $IMAGE:${{ github.sha }} $IMAGE:latest
+          docker push $IMAGE:latest
