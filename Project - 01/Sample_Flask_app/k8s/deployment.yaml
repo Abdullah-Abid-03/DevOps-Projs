@@ -1,1 +1,44 @@
 # For kubernetes deployment, you can create a `deployment.yaml` file that defines the desired state of your application. Below is an example of a simple deployment configuration for a Flask application:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  labels:
+    app: flask-app
+spec:
+  replicas: 1       # Run exactly 1 copy of the app
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+      annotations:
+        # These tell Prometheus: "come scrape me at :5000/metrics"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: flask-app
+        image: abdullah4261/sample-flask-app:latest   # Your Docker Hub image
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:            # Minimum guaranteed resources
+            memory: "64Mi"
+            cpu: "100m"        # 100 millicores = 0.1 CPU core
+          limits:              # Maximum allowed — container killed if exceeded
+            memory: "128Mi"
+            cpu: "500m"
+        # Kubernetes pings /health every 10 seconds
+        # If it fails 3 times, K8s restarts the pod automatically
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
