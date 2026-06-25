@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 *.egg-info/
 *.html
+*.docx
 .DS_Store
 
 # Docker related

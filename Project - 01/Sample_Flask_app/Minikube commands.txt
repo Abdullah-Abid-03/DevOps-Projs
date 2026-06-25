@@ -1,0 +1,36 @@
+#Start the minikube if it's image already downloaded
+minikue start
+
+#Check the status
+minikue status
+
+You should see:
+host: Running
+kubelet: Running
+apiserver: Running
+
+#Check the Kubernetes nodes
+kubectl get nodes
+You should see a single node with Ready status.
+
+#Apply the Kubernetes configuration
+kubectl apply -f k8s/
+
+#restart the deployment
+kubectl rollout restart deployment flask-app
+
+
+# watch the new pod. Wait until its tatus becomes running
+kubectl get pods -w
+
+#Verify the correct image is running. Verify that it's pulling the correct image.
+kubectl describe pod <podname>
+
+
+#Open the app Now you should see the applied changes
+minikube service flask-app-service --url
+
+OR
+===
+
+minikube service flask-app-service
