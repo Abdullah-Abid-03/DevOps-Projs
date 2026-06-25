@@ -107,7 +107,7 @@ git clone https://github.com/Abdullah-Abid-03/DevOps-Projects.git
 cd DevOps-Projects/Project-01/Sample_Flask_app
 ```
 
-**Also download the workflow file from  `.github/workflows/project-01-ci.yml` for Project- 01**
+**Also download the workflow file from  `.github/workflows/project-01-ci.yml` for Project- 01** and place it in the same folder as the project at root level.
 
 ### 2. Run the Flask App Locally (bare Python)
 

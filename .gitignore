@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-.env
 .venv/
 *.egg-info/
 *.html
@@ -10,3 +9,5 @@ __pycache__/
 # Docker related
 *.log
 EOF
+config.bat
+node_modules
