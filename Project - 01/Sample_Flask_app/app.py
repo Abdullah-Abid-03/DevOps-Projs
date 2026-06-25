@@ -104,6 +104,12 @@ def hello():
                 <p><strong>Replicas:</strong> 1</p>
                 <p><strong>Image:</strong> abdullah4261/sample-flask-app:latest</p>
             </div>
+
+            <div class="card">
+                <h3>VERSION - 2 CI/CD PIPELINE</h3>
+                <p><strong>Replicas:</strong> 2</p>
+                <p><strong>Kubernetes pulling the image from the Dockerhub:</strong> abdullah4261/devops-project-01:latest</p>
+            </div>
         </div>
     </body>
     </html>
